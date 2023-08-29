@@ -21,7 +21,9 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     backgroundColor: colors.lightBlack,
+    borderColor: '#222429',
     borderRadius: 20,
+    borderWidth: 1,
     justifyContent: 'center',
   },
   pressedButton: {

@@ -40,7 +40,7 @@ export default function ScoresScreen() {
     if (gameStats.errors < 8) {
       return "c'est beaucoup.";
     }
-    if (gameStats.errors < 12) {
+    if (gameStats.errors > 8) {
       return 'aïe aïe aïe.';
     }
   };

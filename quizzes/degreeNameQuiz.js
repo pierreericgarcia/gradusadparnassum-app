@@ -11,7 +11,7 @@ export const degreeNameQuiz = () => {
   };
 
   return {
-    title: `Nom du degré ${toRoman(randomDegree.index + 1)} du mode ${
+    title: `Nom du degré ${toRoman(randomDegree.index + 1)} en ${
       randomMode.label
     } ?`,
     questions: [DegreeNameQuestion],

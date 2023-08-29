@@ -5,7 +5,7 @@ import { Text } from '../components/Text';
 import { spacing } from '../theme';
 import { createIncrementalArray } from '../utils';
 
-export default function IntervalLengthQuestion({ onPress }) {
+export default function AlterationsCountQuestion({ onPress }) {
   return (
     <View
       style={{
@@ -16,9 +16,9 @@ export default function IntervalLengthQuestion({ onPress }) {
         justifyContent: 'space-between',
       }}
     >
-      {createIncrementalArray(12, true).map(length => (
+      {createIncrementalArray(8).map(length => (
         <AnswerButton
-          style={{ flexBasis: '30%', height: '23%' }}
+          style={{ flexBasis: '48%', height: '23%' }}
           onPress={() => onPress({ id: length, label: length })}
           key={length}
         >

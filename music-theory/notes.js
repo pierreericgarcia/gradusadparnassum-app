@@ -107,3 +107,10 @@ export const notes = {
   ...naturalNotes,
   ...alteredNotes,
 };
+
+export const getAlterationsCount = (notes, alterationId) => {
+  const alteredNotesArray = Object.values(notes).filter(note =>
+    note.id.includes(`_${alterationId}`),
+  );
+  return alteredNotesArray.length;
+};

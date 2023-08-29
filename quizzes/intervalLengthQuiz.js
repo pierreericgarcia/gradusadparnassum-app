@@ -3,7 +3,9 @@ import IntervalLengthQuestion from '../questions/IntervalLengthQuestion.js';
 import { getRandomItem } from '../utils.js';
 
 export const intervalLengthQuiz = () => {
-  const randomInterval = getRandomItem(Object.values(intervals));
+  const randomInterval = getRandomItem(
+    Object.values(intervals).filter(({ length }) => length.chromatic > 0),
+  );
 
   const checkAnswer = ([intervalLength]) => {
     return intervalLength.id === randomInterval.length.chromatic;

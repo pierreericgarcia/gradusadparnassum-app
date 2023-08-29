@@ -75,7 +75,7 @@ export default function GameScreen() {
                     </Text>
                   </AnswerBadge>
                 ) : (
-                  <Text style={{ height: 28 }}>____</Text>
+                  <Text style={{ height: 25 }}>____</Text>
                 )}
               </View>
             ))}

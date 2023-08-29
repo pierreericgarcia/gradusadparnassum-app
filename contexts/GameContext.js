@@ -8,11 +8,13 @@ import { degreeIndexQuiz } from '../quizzes/degreeIndexQuiz';
 import { relativeScaleQuiz } from '../quizzes/relativeScaleQuiz';
 import { modeIntervalsQuiz } from '../quizzes/modeIntervalsQuiz';
 import { intervalLengthQuiz } from '../quizzes/intervalLengthQuiz';
+import { alterationsCountQuizz } from '../quizzes/alterationsCountQuizz';
 
 export const GAME_DURATION = 60;
 const GameContext = createContext();
 
 const quizzes = [
+  alterationsCountQuizz,
   degreeChordQualityQuiz,
   degreeFundamentalQuiz,
   degreeIndexQuiz,
@@ -54,7 +56,7 @@ export const GameProvider = ({ children }) => {
     }
 
     return () => clearTimeout(timer);
-  }, [gameStats, currentQuiz, timeLeft]);
+  }, [timeLeft]);
 
   useEffect(() => {
     if (currentQuizAnswers.length === currentQuiz.questions.length) {

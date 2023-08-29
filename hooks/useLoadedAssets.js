@@ -13,6 +13,7 @@ const imagesToPreload = [
   require('../assets/images/liszt.png'),
   require('../assets/images/paganini.png'),
   require('../assets/images/saint-saens.png'),
+  require('../assets/images/splash.png'),
 ];
 
 export function useLoadedAssets() {

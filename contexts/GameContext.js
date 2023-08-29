@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { getRandomItem } from '../utils';
-import { degreeChordQualityQuiz } from '../quizzes/degreeChordQualityQuiz';
+import { degreeThreeNotesChordQualityQuiz } from '../quizzes/degreeThreeNotesChordQualityQuiz';
 import { degreeFundamentalQuiz } from '../quizzes/degreeFundamentalQuiz';
 import { useNavigation } from '@react-navigation/native';
 import { degreeNameQuiz } from '../quizzes/degreeNameQuiz';
@@ -15,7 +15,7 @@ const GameContext = createContext();
 
 const quizzes = [
   alterationsCountQuizz,
-  degreeChordQualityQuiz,
+  degreeThreeNotesChordQualityQuiz,
   degreeFundamentalQuiz,
   degreeIndexQuiz,
   degreeNameQuiz,

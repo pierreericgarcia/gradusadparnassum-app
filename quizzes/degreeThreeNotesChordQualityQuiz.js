@@ -1,10 +1,10 @@
 import { createNaturalDegreeChord } from '../music-theory/chords.js';
 import { diatonicModes } from '../music-theory/intervals.js';
 import { scales } from '../music-theory/scales.js';
-import ChordQuestion from '../questions/ChordQuestion.js';
+import ThreeNotesChordQuestion from '../questions/ThreeNotesChordQuestion.js';
 import { getRandomItem } from '../utils.js';
 
-export const degreeChordQualityQuiz = () => {
+export const degreeThreeNotesChordQualityQuiz = () => {
   const randomMode = getRandomItem(Object.values(diatonicModes));
   const randomDegree = getRandomItem(randomMode.degrees);
 
@@ -18,8 +18,8 @@ export const degreeChordQualityQuiz = () => {
   };
 
   return {
-    title: `Qualité de l'accord de ${randomDegree.label} en ${randomMode.label} ?`,
-    questions: [ChordQuestion],
+    title: `Qualité de l'accord à 3 sons de ${randomDegree.label} en ${randomMode.label} ?`,
+    questions: [ThreeNotesChordQuestion],
     checkAnswer,
   };
 };

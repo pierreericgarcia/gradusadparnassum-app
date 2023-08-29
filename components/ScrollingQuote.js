@@ -45,6 +45,7 @@ export function ScrollingQuote() {
         duration={10000}
         loop
         bounce={false}
+        scroll={false}
         easing={Easing.linear}
         repeatSpacer={0}
       >

@@ -3,7 +3,7 @@ import NoteQuestion from '../questions/NoteQuestion';
 import { createIncrementalArray } from '../utils';
 
 export const scaleAlteredNotesQuiz = () => {
-  const randomScale = getRandomScale('major', ['C_major']);
+  const randomScale = getRandomScale('major', ['C_major_scale']);
   const alteredNotes = randomScale.notes.filter(note => !!note.alteration);
 
   const checkAnswer = answers => {

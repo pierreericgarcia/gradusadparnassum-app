@@ -1,27 +1,27 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { getRandomItem } from '../utils';
-import { degreeThreeNotesChordQualityQuiz } from '../quizzes/degreeThreeNotesChordQualityQuiz';
-import { degreeFundamentalQuiz } from '../quizzes/degreeFundamentalQuiz';
 import { useNavigation } from '@react-navigation/native';
-import { degreeNameQuiz } from '../quizzes/degreeNameQuiz';
-import { degreeIndexQuiz } from '../quizzes/degreeIndexQuiz';
-import { relativeScaleQuiz } from '../quizzes/relativeScaleQuiz';
-import { modeIntervalsQuiz } from '../quizzes/modeIntervalsQuiz';
-import { intervalLengthQuiz } from '../quizzes/intervalLengthQuiz';
-import { alterationsCountQuizz } from '../quizzes/alterationsCountQuizz';
+import { getRandomItem } from '../utils';
+import { degreeQuiz } from '../quizzes/degreeQuiz';
+import { fifthCycleQuiz } from '../quizzes/fifthCycleQuiz';
+import { flatOrderQuiz } from '../quizzes/flatOrderQuiz';
+import { scaleAlterationsCountQuiz } from '../quizzes/scaleAlterationsCountQuiz';
+import { scaleAlterationTypeQuiz } from '../quizzes/scaleAlterationTypeQuiz';
+import { scaleAlteredNotesQuiz } from '../quizzes/scaleAlteredNotesQuiz';
+import { scaleNaturalNotesQuiz } from '../quizzes/scaleNaturalNotesQuiz';
+import { sharpOrderQuiz } from '../quizzes/sharpOrderQuiz';
 
 export const GAME_DURATION = 60;
 const GameContext = createContext();
 
 const quizzes = [
-  alterationsCountQuizz,
-  degreeThreeNotesChordQualityQuiz,
-  degreeFundamentalQuiz,
-  degreeIndexQuiz,
-  degreeNameQuiz,
-  intervalLengthQuiz,
-  modeIntervalsQuiz,
-  relativeScaleQuiz,
+  degreeQuiz,
+  fifthCycleQuiz,
+  flatOrderQuiz,
+  scaleAlterationsCountQuiz,
+  scaleAlterationTypeQuiz,
+  scaleAlteredNotesQuiz,
+  scaleNaturalNotesQuiz,
+  sharpOrderQuiz,
 ];
 
 export const useGame = () => {

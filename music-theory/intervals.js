@@ -1,5 +1,4 @@
-import { rotateArray } from '../utils.js';
-import { notes } from './notes.js';
+import { notes } from './notes';
 
 export const intervals = {
   unison: {
@@ -26,6 +25,14 @@ export const intervals = {
       chromatic: 2,
     },
   },
+  augmented_second: {
+    id: 'augmented_second',
+    label: 'Seconde Augmentée',
+    length: {
+      diatonic: 1,
+      chromatic: 3,
+    },
+  },
   minor_third: {
     id: 'minor_third',
     label: 'Tierce Mineure',
@@ -40,6 +47,14 @@ export const intervals = {
     length: {
       diatonic: 2,
       chromatic: 4,
+    },
+  },
+  augmented_third: {
+    id: 'augmented_third',
+    label: 'Tierce Augmentée',
+    length: {
+      diatonic: 2,
+      chromatic: 5,
     },
   },
   diminished_fourth: {
@@ -90,6 +105,14 @@ export const intervals = {
       chromatic: 8,
     },
   },
+  diminished_sixth: {
+    id: 'diminished_sixth',
+    label: 'Sixte Diminuée',
+    length: {
+      diatonic: 5,
+      chromatic: 7,
+    },
+  },
   minor_sixth: {
     id: 'minor_sixth',
     label: 'Sixte Mineure',
@@ -104,6 +127,14 @@ export const intervals = {
     length: {
       diatonic: 5,
       chromatic: 9,
+    },
+  },
+  augmented_sixth: {
+    id: 'augmented_sixth',
+    label: 'Sixte Augmentée',
+    length: {
+      diatonic: 5,
+      chromatic: 10,
     },
   },
   diminished_seventh: {
@@ -128,6 +159,14 @@ export const intervals = {
     length: {
       diatonic: 6,
       chromatic: 11,
+    },
+  },
+  augmented_seventh: {
+    id: 'augmented_seventh',
+    label: 'Septième Augmentée',
+    length: {
+      diatonic: 6,
+      chromatic: 12,
     },
   },
   octave: {
@@ -183,7 +222,7 @@ export const findIntervalByNotes = (startNote, endNote) => {
   );
 };
 
-const getSuccessiveIntervalsFromNotes = (notes, isCyclic = false) => {
+export const getSuccessiveIntervalsFromNotes = (notes, isCyclic = false) => {
   const intervalsList = [];
 
   for (let i = 0; i < notes.length - 1; i++) {
@@ -201,140 +240,14 @@ const getSuccessiveIntervalsFromNotes = (notes, isCyclic = false) => {
   return intervalsList;
 };
 
-export const getModeFromNotes = notes => {
-  const scaleSuccessiveIntervals = getSuccessiveIntervalsFromNotes(notes, true);
+export const getIntervalsFromTonic = notes => {
+  const intervalsFromTonic = [];
+  const tonic = notes[0];
 
-  return Object.values(diatonicModes).find(mode =>
-    scaleSuccessiveIntervals.every(
-      (scaleInterval, i) => scaleInterval.id === mode.intervals[i].id,
-    ),
-  );
-};
+  for (let i = 1; i < notes.length; i++) {
+    const interval = findIntervalByNotes(tonic, notes[i]);
+    intervalsFromTonic.push(interval);
+  }
 
-const diatonicIntervals = getSuccessiveIntervalsFromNotes(
-  [notes.C, notes.D, notes.E, notes.F, notes.G, notes.A, notes.B],
-  true,
-);
-
-export const degrees = {
-  tonic: {
-    id: 'tonic',
-    alias: 'I',
-    label: 'tonique',
-    index: 0,
-  },
-  supertonic: {
-    id: 'supertonic',
-    alias: 'II',
-    label: 'sus-tonique',
-    index: 1,
-  },
-  mediant: {
-    id: 'mediant',
-    alias: 'III',
-    label: 'médiante',
-    index: 2,
-  },
-  subdominant: {
-    id: 'subdominant',
-    alias: 'IV',
-    label: 'sous-dominante',
-    index: 3,
-  },
-  dominant: {
-    id: 'dominant',
-    alias: 'V',
-    label: 'dominante',
-    index: 4,
-  },
-  superdominant: {
-    id: 'superdominant',
-    alias: 'VI',
-    label: 'sus-dominante',
-    index: 5,
-  },
-  leadingTone: {
-    id: 'leadingTone',
-    alias: 'VII',
-    label: 'sensible',
-    index: 6,
-  },
-  subtonic: {
-    id: 'subtonic',
-    alias: 'VII',
-    label: 'sous-tonique',
-    index: 6,
-  },
-};
-
-export const diatonicModes = {
-  major: {
-    id: 'major',
-    alias: 'Major',
-    label: 'Majeur',
-    intervals: diatonicIntervals,
-    degrees: [
-      degrees.tonic,
-      degrees.supertonic,
-      degrees.mediant,
-      degrees.subdominant,
-      degrees.dominant,
-      degrees.superdominant,
-      degrees.leadingTone,
-    ],
-  },
-  // dorian: {
-  //     id: 'dorian',
-  //     alias: 'Dorien',
-  //     label: 'Dorien',
-  //     intervals: rotateArray(diatonicIntervals, -1),
-  //     degrees: [
-  //         degrees.tonic,
-  //         degrees.supertonic,
-  //         degrees.mediant,
-  //         degrees.subdominant,
-  //         degrees.dominant,
-  //         degrees.superdominant,
-  //         degrees.subtonic,
-  //     ],
-  // },
-  // phrygian: {
-  //     id: 'phrygian',
-  //     alias: 'Phrygien',
-  //     label: 'Phrygien',
-  //     intervals: rotateArray(diatonicIntervals, -2),
-  // },
-  // lydian: {
-  //     id: 'lydian',
-  //     alias: 'Lydien',
-  //     label: 'Lydien',
-  //     intervals: rotateArray(diatonicIntervals, -3),
-  // },
-  // mixolydian: {
-  //     id: 'mixolydian',
-  //     alias: 'Mixolydien',
-  //     label: 'Mixolydien',
-  //     intervals: rotateArray(diatonicIntervals, -4),
-  // },
-  minor: {
-    id: 'minor',
-    alias: 'Minor',
-    label: 'Mineur',
-    intervals: rotateArray(diatonicIntervals, -5),
-    degrees: [
-      degrees.tonic,
-      degrees.supertonic,
-      degrees.mediant,
-      degrees.subdominant,
-      degrees.dominant,
-      degrees.superdominant,
-      degrees.subtonic,
-    ],
-  },
-  // locrian: {
-  //     id: 'locrian',
-  //     alias: 'Locrien',
-  //     label: 'Locrien',
-  //     intervals: rotateArray(diatonicIntervals, -6),
-  // },
+  return intervalsFromTonic;
 };

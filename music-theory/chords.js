@@ -2,7 +2,7 @@ import {
   findIntervalByNotes,
   findNoteByInterval,
   intervals,
-} from './intervals.js';
+} from './intervals';
 
 export const chords = {
   major: {

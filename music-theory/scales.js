@@ -1,6 +1,121 @@
-import { getRandomItem, rotateArray } from '../utils.js';
-import { diatonicModes, getModeFromNotes } from './intervals.js';
-import { notes } from './notes.js';
+import _ from 'lodash';
+import { getRandomItem, rotateArray } from '../utils';
+import {
+  findNoteByInterval,
+  getSuccessiveIntervalsFromNotes,
+  intervals,
+} from './intervals';
+import { naturalNotes, notes } from './notes';
+const { flatMap, take } = _;
+
+// SCALES PATTERN 📐
+
+const major_scale_pattern = [
+  intervals.major_second,
+  intervals.major_second,
+  intervals.minor_second,
+  intervals.major_second,
+  intervals.major_second,
+  intervals.major_second,
+  intervals.minor_second,
+];
+
+const harmonic_minor_scale_pattern = [
+  intervals.major_second,
+  intervals.minor_second,
+  intervals.major_second,
+  intervals.major_second,
+  intervals.minor_second,
+  intervals.augmented_second,
+  intervals.minor_second,
+];
+
+const scales_pattern = {
+  major: {
+    id: 'major',
+    label: 'Majeur',
+    modes: [
+      {
+        id: 'major',
+        label: 'Majeur',
+        intervals: major_scale_pattern,
+      },
+      {
+        id: 'dorian',
+        label: 'Dorien',
+        intervals: rotateArray(major_scale_pattern, -1),
+      },
+      {
+        id: 'phrygian',
+        label: 'Phrygien',
+        intervals: rotateArray(major_scale_pattern, -2),
+      },
+      {
+        id: 'lydian',
+        label: 'Lydien',
+        intervals: rotateArray(major_scale_pattern, -3),
+      },
+      {
+        id: 'mixolydian',
+        label: 'Mixolydien',
+        intervals: rotateArray(major_scale_pattern, -4),
+      },
+      {
+        id: 'natural_minor',
+        label: 'Mineur Naturel',
+        intervals: rotateArray(major_scale_pattern, -5),
+      },
+      {
+        id: 'locrian',
+        label: 'Locrien',
+        intervals: rotateArray(major_scale_pattern, -6),
+      },
+    ],
+  },
+  harmonic_minor: {
+    id: 'harmonic_minor',
+    label: 'Mineur Harmonique',
+    modes: [
+      {
+        id: 'harmonic_minor',
+        label: 'Mineur Harmonique',
+        intervals: harmonic_minor_scale_pattern,
+      },
+      {
+        id: 'locrian_becarre_thirteenth',
+        label: 'Locrien ♮13',
+        intervals: rotateArray(harmonic_minor_scale_pattern, -1),
+      },
+      {
+        id: 'ionian_sharp_fifth',
+        label: 'Ionien ♯5',
+        intervals: rotateArray(harmonic_minor_scale_pattern, -2),
+      },
+      {
+        id: 'dorian_sharp_eleventh',
+        label: 'Dorien ♯11',
+        intervals: rotateArray(harmonic_minor_scale_pattern, -3),
+      },
+      {
+        id: 'mixolydian_flat_nineth_flat_thirteenth',
+        label: 'Mixolydien ♭9♭13',
+        intervals: rotateArray(harmonic_minor_scale_pattern, -4),
+      },
+      {
+        id: 'lydian_sharp_nineth',
+        label: 'Lydien ♯9',
+        intervals: rotateArray(harmonic_minor_scale_pattern, -5),
+      },
+      {
+        id: 'altered_flat_flat_seventh',
+        label: 'Altéré ♭♭7',
+        intervals: rotateArray(harmonic_minor_scale_pattern, -6),
+      },
+    ],
+  },
+};
+
+// SCALES GENERATION ⚡️
 
 const alterateLeadingTone = (scale, alteration) => {
   return scale
@@ -18,9 +133,21 @@ const previousFifth = scale => {
   return rotateArray(alteredPreviousScale, 4);
 };
 
-const generateNewScale = (scale, transform) => {
+const getModeFromNotes = notes => {
+  const scalePattern = getSuccessiveIntervalsFromNotes(notes, true);
+  const modesList = flatMap(scales_pattern, scale => scale.modes);
+
+  return modesList.find(mode =>
+    scalePattern.every(
+      (interval, index) => interval.id === mode.intervals[index].id,
+    ),
+  );
+};
+
+const transformScale = (scale, transform) => {
   const newScaleNotes = transform(scale.notes);
   const newScaleMode = getModeFromNotes(newScaleNotes);
+
   return {
     id: `${newScaleNotes[0].id}_${newScaleMode.id}_scale`,
     label: `${newScaleNotes[0].label} ${newScaleMode.label}`,
@@ -29,95 +156,86 @@ const generateNewScale = (scale, transform) => {
   };
 };
 
-const C_major_scale = {
-  id: 'C_major_scale',
-  label: 'Do Majeur',
-  mode: diatonicModes.major,
-  notes: [notes.C, notes.D, notes.E, notes.F, notes.G, notes.A, notes.B],
+const createScaleFromNoteAndMode = (note, mode) => {
+  const scaleNotes = [note];
+
+  for (let [index, interval] of take(mode.intervals, 6).entries()) {
+    const nextNote = findNoteByInterval(scaleNotes[index], interval);
+    scaleNotes.push(nextNote);
+  }
+
+  return {
+    id: `${note.id}_${mode.id}_scale`,
+    label: `${note.label} ${mode.label}`,
+    notes: scaleNotes,
+    mode,
+  };
 };
 
-// MAJOR SHARP SCALES
+const generateScales = (initialScale, transformFunction, iterations) => {
+  let currentScale = initialScale;
+  const scales = {
+    [initialScale.notes[0].id]: initialScale,
+  };
 
-const G_major_scale = generateNewScale(C_major_scale, nextFifth);
-const D_major_scale = generateNewScale(G_major_scale, nextFifth);
-const A_major_scale = generateNewScale(D_major_scale, nextFifth);
-const E_major_scale = generateNewScale(A_major_scale, nextFifth);
-const B_major_scale = generateNewScale(E_major_scale, nextFifth);
-const F_sharp_major_scale = generateNewScale(B_major_scale, nextFifth);
-const C_sharp_major_scale = generateNewScale(F_sharp_major_scale, nextFifth);
+  for (let i = 0; i < iterations; i++) {
+    currentScale = transformScale(currentScale, transformFunction);
+    scales[currentScale.notes[0].id] = currentScale;
+  }
 
-// // MAJOR FLAT SCALES
+  return scales;
+};
 
-const F_major_scale = generateNewScale(C_major_scale, previousFifth);
-const B_flat_major_scale = generateNewScale(F_major_scale, previousFifth);
-const E_flat_major_scale = generateNewScale(B_flat_major_scale, previousFifth);
-const A_flat_major_scale = generateNewScale(E_flat_major_scale, previousFifth);
-const D_flat_major_scale = generateNewScale(A_flat_major_scale, previousFifth);
-const G_flat_major_scale = generateNewScale(D_flat_major_scale, previousFifth);
-const C_flat_major_scale = generateNewScale(G_flat_major_scale, previousFifth);
+const generateNaturalMinorScales = majorScales => {
+  return Object.keys(majorScales).reduce((acc, scaleKey) => {
+    const majorScale = majorScales[scaleKey];
+    const minorScale = transformScale(majorScale, scale =>
+      rotateArray(scale, -5),
+    );
+    acc[minorScale.notes[0].id] = minorScale;
+    return acc;
+  }, {});
+};
+
+const generateHarmonicMinorScales = naturalMinorScales => {
+  return Object.keys(naturalMinorScales).reduce((acc, scaleKey) => {
+    const naturalMinorScale = naturalMinorScales[scaleKey];
+    const harmonicMinorScale = createScaleFromNoteAndMode(
+      naturalMinorScale.notes[0],
+      scales_pattern.harmonic_minor.modes[0],
+    );
+    acc[harmonicMinorScale.notes[0].id] = harmonicMinorScale;
+    return acc;
+  }, {});
+};
+
+// SCALES 🪜
+
+const C_major_scale = createScaleFromNoteAndMode(
+  naturalNotes.C,
+  scales_pattern.major.modes[0],
+);
+const majorScales = {
+  C: C_major_scale,
+  ...generateScales(C_major_scale, nextFifth, 7),
+  ...generateScales(C_major_scale, previousFifth, 7),
+};
+
+const naturalMinorScales = generateNaturalMinorScales(majorScales);
+const harmonicMinorScales = generateHarmonicMinorScales(naturalMinorScales);
 
 export const scales = {
-  major: {
-    C: C_major_scale,
-    G: G_major_scale,
-    D: D_major_scale,
-    A: A_major_scale,
-    E: E_major_scale,
-    B: B_major_scale,
-    F_sharp: F_sharp_major_scale,
-    C_sharp: C_sharp_major_scale,
-    F: F_major_scale,
-    B_flat: B_flat_major_scale,
-    E_flat: E_flat_major_scale,
-    A_flat: A_flat_major_scale,
-    D_flat: D_flat_major_scale,
-    G_flat: G_flat_major_scale,
-    C_flat: C_flat_major_scale,
-  },
-  minor: {
-    A: generateNewScale(C_major_scale, scale => rotateArray(scale, -5)),
-    E: generateNewScale(G_major_scale, scale => rotateArray(scale, -5)),
-    B: generateNewScale(D_major_scale, scale => rotateArray(scale, -5)),
-    F_sharp: generateNewScale(A_major_scale, scale => rotateArray(scale, -5)),
-    C_sharp: generateNewScale(E_major_scale, scale => rotateArray(scale, -5)),
-    G_sharp: generateNewScale(B_major_scale, scale => rotateArray(scale, -5)),
-    D_sharp: generateNewScale(F_sharp_major_scale, scale =>
-      rotateArray(scale, -5),
-    ),
-    A_sharp: generateNewScale(C_sharp_major_scale, scale =>
-      rotateArray(scale, -5),
-    ),
-    D: generateNewScale(F_major_scale, scale => rotateArray(scale, -5)),
-    G: generateNewScale(B_flat_major_scale, scale => rotateArray(scale, -5)),
-    C: generateNewScale(E_flat_major_scale, scale => rotateArray(scale, -5)),
-    F: generateNewScale(A_flat_major_scale, scale => rotateArray(scale, -5)),
-    B_flat: generateNewScale(D_flat_major_scale, scale =>
-      rotateArray(scale, -5),
-    ),
-    E_flat: generateNewScale(G_flat_major_scale, scale =>
-      rotateArray(scale, -5),
-    ),
-    A_flat: generateNewScale(C_flat_major_scale, scale =>
-      rotateArray(scale, -5),
-    ),
-  },
+  major: majorScales,
+  natural_minor: naturalMinorScales,
+  harmonic_minor: harmonicMinorScales,
 };
 
-export const getRelativeScale = startScale => {
-  switch (startScale.mode.id) {
-    case 'major':
-      return generateNewScale(startScale, scale => rotateArray(scale, -5));
-
-    case 'minor':
-      return generateNewScale(startScale, scale => rotateArray(scale, -2));
-
-    default:
-      break;
-  }
-};
-
-export const getRandomScale = () => {
-  const randomMode = getRandomItem(Object.keys(scales));
-  const randomScale = getRandomItem(Object.values(scales[randomMode]));
+export const getRandomScale = (mode, exceptions = []) => {
+  const targetMode = mode ? mode : getRandomItem(Object.keys(scales));
+  const randomScale = getRandomItem(
+    Object.values(scales[targetMode]).filter(
+      scale => !exceptions.includes(scale.id),
+    ),
+  );
   return randomScale;
 };

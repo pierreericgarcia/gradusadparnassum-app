@@ -16,9 +16,8 @@ export default function AlterationQuestion({ onPress }) {
         justifyContent: 'space-between',
       }}
     >
-      {[{ symbol: '♮', id: null, label: 'Bécarre' }]
-        .concat(Object.values(alterations))
-        .map(alteration => (
+      {[alterations.becarre, alterations.flat, alterations.sharp].map(
+        alteration => (
           <AnswerButton
             style={{ flexBasis: '100%', height: '30%' }}
             onPress={() =>
@@ -30,7 +29,8 @@ export default function AlterationQuestion({ onPress }) {
               {alteration.symbol}
             </Text>
           </AnswerButton>
-        ))}
+        ),
+      )}
     </View>
   );
 }

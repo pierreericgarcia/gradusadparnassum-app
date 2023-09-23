@@ -1,6 +1,6 @@
 import { notes } from '../music-theory/notes';
 import { getRandomScale } from '../music-theory/scales';
-import AlterationQuestion from '../questions/AlterationQuestion';
+import ShortAlterationQuestion from '../questions/ShortAlterationQuestion';
 import NoteQuestion from '../questions/NoteQuestion';
 import { getRandomIndex, toRoman } from '../utils';
 
@@ -19,7 +19,7 @@ export const degreeQuiz = () => {
 
   return {
     title: `Degré ${toRoman(randomDegreeIndex + 1)} de ${randomScale.label} ?`,
-    questions: [NoteQuestion, AlterationQuestion],
+    questions: [NoteQuestion, ShortAlterationQuestion],
     checkAnswer,
   };
 };

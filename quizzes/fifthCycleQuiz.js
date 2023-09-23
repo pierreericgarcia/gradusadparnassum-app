@@ -1,6 +1,6 @@
 import { notes } from '../music-theory/notes';
 import { getRandomScale } from '../music-theory/scales';
-import AlterationQuestion from '../questions/AlterationQuestion';
+import ShortAlterationQuestion from '../questions/ShortAlterationQuestion';
 import NoteQuestion from '../questions/NoteQuestion';
 import { getRandomItem } from '../utils';
 
@@ -29,7 +29,7 @@ export const fifthCycleQuiz = () => {
 
   return {
     title: `Quinte ${randomDirection.label} de ${randomScale.notes[0].label} ?`,
-    questions: [NoteQuestion, AlterationQuestion],
+    questions: [NoteQuestion, ShortAlterationQuestion],
     checkAnswer,
   };
 };

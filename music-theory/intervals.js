@@ -33,6 +33,14 @@ export const intervals = {
       chromatic: 3,
     },
   },
+  diminished_third: {
+    id: 'diminished_third',
+    label: 'Tierce Diminuée',
+    length: {
+      diatonic: 2,
+      chromatic: 2,
+    },
+  },
   minor_third: {
     id: 'minor_third',
     label: 'Tierce Mineure',
@@ -47,14 +55,6 @@ export const intervals = {
     length: {
       diatonic: 2,
       chromatic: 4,
-    },
-  },
-  augmented_third: {
-    id: 'augmented_third',
-    label: 'Tierce Augmentée',
-    length: {
-      diatonic: 2,
-      chromatic: 5,
     },
   },
   diminished_fourth: {
@@ -105,14 +105,6 @@ export const intervals = {
       chromatic: 8,
     },
   },
-  diminished_sixth: {
-    id: 'diminished_sixth',
-    label: 'Sixte Diminuée',
-    length: {
-      diatonic: 5,
-      chromatic: 7,
-    },
-  },
   minor_sixth: {
     id: 'minor_sixth',
     label: 'Sixte Mineure',
@@ -159,14 +151,6 @@ export const intervals = {
     length: {
       diatonic: 6,
       chromatic: 11,
-    },
-  },
-  augmented_seventh: {
-    id: 'augmented_seventh',
-    label: 'Septième Augmentée',
-    length: {
-      diatonic: 6,
-      chromatic: 12,
     },
   },
   octave: {

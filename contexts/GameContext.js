@@ -11,7 +11,7 @@ import { sharpOrderQuiz } from '../quizzes/sharpOrderQuiz';
 import { intervalFromNoteQuiz } from '../quizzes/intervalFromNoteQuiz';
 import { noteAlterationInScaleQuiz } from '../quizzes/noteAlterationInScaleQuiz';
 
-export const GAME_DURATION = 60;
+export const GAME_DURATION = 120;
 const GameContext = createContext();
 
 const quizzes = [

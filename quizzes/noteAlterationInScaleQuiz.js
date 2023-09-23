@@ -1,6 +1,6 @@
 import { Note, alterations } from '../music-theory/notes.js';
 import { getRandomScale } from '../music-theory/scales.js';
-import ShortAlterationQuestion from '../questions/ShortAlterationQuestion';
+import AlterationQuestion from '../questions/AlterationQuestion.js';
 import { getRandomItem } from '../utils.js';
 import chalk from 'chalk';
 
@@ -23,7 +23,7 @@ export const noteAlterationInScaleQuiz = () => {
     title: `Altération du ${chalk.yellow(
       randomNoteInScale.base.label,
     )} en ${chalk.yellow(randomScale.label)} ?`,
-    questions: [ShortAlterationQuestion],
+    questions: [AlterationQuestion],
     checkAnswer,
   };
 };

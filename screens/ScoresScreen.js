@@ -22,10 +22,10 @@ export default function ScoresScreen() {
     if (gameStats.bestStreak < 4) {
       return 'pas mal, pas mal.';
     }
-    if (gameStats.bestStreak < 8) {
+    if (gameStats.bestStreak <= 8) {
       return 'lâche rien.';
     }
-    if (gameStats.bestStreak < 12) {
+    if (gameStats.bestStreak > 8) {
       return "là c'est fort";
     }
   };
@@ -37,7 +37,7 @@ export default function ScoresScreen() {
     if (gameStats.errors < 2) {
       return 'ça passe.';
     }
-    if (gameStats.errors < 8) {
+    if (gameStats.errors <= 8) {
       return "c'est beaucoup.";
     }
     if (gameStats.errors > 8) {

@@ -143,3 +143,7 @@ export const notes = {
   ...naturalNotes,
   ...alteredNotes,
 };
+
+export const areNotesEqual = (firstNote, secondNote) =>
+  firstNote.index.diatonic === secondNote.index.diatonic &&
+  firstNote.index.chromatic === secondNote.index.chromatic;

@@ -1,4 +1,4 @@
-import { notes } from '../music-theory/notes';
+import { areNotesEqual, notes } from '../music-theory/notes';
 import { getRandomScale } from '../music-theory/scales';
 import NoteQuestion from '../questions/NoteQuestion';
 import { getRandomItem } from '../utils';
@@ -21,10 +21,7 @@ export const fifthCycleQuiz = () => {
     const answeredNote = notes[`${note.id}_${alteration.id}`];
     const targetNote =
       randomScale.notes[randomDirection.value === 'asc' ? 4 : 3];
-    return (
-      answeredNote.index.diatonic === targetNote.index.diatonic &&
-      answeredNote.index.chromatic === targetNote.index.chromatic
-    );
+    return areNotesEqual(answeredNote, targetNote);
   };
 
   return {

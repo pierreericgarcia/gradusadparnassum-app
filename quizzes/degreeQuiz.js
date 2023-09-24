@@ -1,4 +1,4 @@
-import { notes } from '../music-theory/notes';
+import { areNotesEqual, notes } from '../music-theory/notes';
 import { getRandomScale } from '../music-theory/scales';
 import NoteQuestion from '../questions/NoteQuestion';
 import { getRandomIndex, toRoman } from '../utils';
@@ -11,10 +11,7 @@ export const degreeQuiz = () => {
   const checkAnswer = ([note, alteration]) => {
     const answeredNote = notes[`${note.id}_${alteration.id}`];
     const randomDegree = randomScale.notes[randomDegreeIndex];
-    return (
-      answeredNote.index.diatonic === randomDegree.index.diatonic &&
-      answeredNote.index.chromatic === randomDegree.index.chromatic
-    );
+    return areNotesEqual(answeredNote, randomDegree);
   };
 
   return {

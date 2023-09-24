@@ -182,15 +182,24 @@ const calculateTargetIndices = (baseNote, interval, descendant) => {
   };
 };
 
-export const findNoteByInterval = (baseNote, interval, descendant = false) => {
+export const findNoteByInterval = (
+  baseNote,
+  interval,
+  descendant = false,
+  diatonic = false,
+) => {
   const { chromatic: targetChromaticIndex, diatonic: targetDiatonicIndex } =
     calculateTargetIndices(baseNote, interval, descendant);
 
-  return Object.values(notes).find(
-    note =>
+  return Object.values(notes).find(note => {
+    if (diatonic) {
+      return note.index.diatonic === targetDiatonicIndex;
+    }
+    return (
       note.index.chromatic === targetChromaticIndex &&
-      note.index.diatonic === targetDiatonicIndex,
-  );
+      note.index.diatonic === targetDiatonicIndex
+    );
+  });
 };
 
 export const findIntervalByNotes = (startNote, endNote) => {

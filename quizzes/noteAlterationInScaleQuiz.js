@@ -1,4 +1,4 @@
-import { Note, alterations } from '../music-theory/notes.js';
+import { Note, alterations, areNotesEqual } from '../music-theory/notes.js';
 import { getRandomScale } from '../music-theory/scales.js';
 import AlterationQuestion from '../questions/AlterationQuestion.js';
 import { getRandomItem } from '../utils.js';
@@ -13,10 +13,7 @@ export const noteAlterationInScaleQuiz = () => {
       randomNoteInScale.base,
       alterations[alteration.id],
     );
-    return (
-      answeredNote.index.diatonic === randomNoteInScale.index.diatonic &&
-      answeredNote.index.chromatic === randomNoteInScale.index.chromatic
-    );
+    return areNotesEqual(answeredNote, randomNoteInScale);
   };
 
   return {

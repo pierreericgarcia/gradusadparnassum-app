@@ -1,5 +1,5 @@
 import { findNoteByInterval, intervals } from '../music-theory/intervals.js';
-import { notes } from '../music-theory/notes.js';
+import { areNotesEqual, notes } from '../music-theory/notes.js';
 import AlterationQuestion from '../questions/AlterationQuestion';
 import NoteQuestion from '../questions/NoteQuestion';
 import { getRandomItem } from '../utils.js';
@@ -17,10 +17,7 @@ export const intervalFromNoteQuiz = () => {
   const checkAnswer = ([note, alteration]) => {
     const answeredNote = notes[`${note.id}_${alteration.id}`];
     const targetNote = findNoteByInterval(randomNote, randomInterval);
-    return (
-      answeredNote.index.diatonic === targetNote.index.diatonic &&
-      answeredNote.index.chromatic === targetNote.index.chromatic
-    );
+    return areNotesEqual(answeredNote, targetNote);
   };
 
   return {

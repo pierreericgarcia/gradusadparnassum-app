@@ -10,11 +10,13 @@ import { scaleNaturalNotesQuiz } from '../quizzes/scaleNaturalNotesQuiz';
 import { sharpOrderQuiz } from '../quizzes/sharpOrderQuiz';
 import { intervalFromNoteQuiz } from '../quizzes/intervalFromNoteQuiz';
 import { noteAlterationInScaleQuiz } from '../quizzes/noteAlterationInScaleQuiz';
+import { chordQuiz } from '../quizzes/chordQuiz';
 
 export const GAME_DURATION = 120;
 const GameContext = createContext();
 
 const quizzes = [
+  chordQuiz,
   degreeQuiz,
   fifthCycleQuiz,
   flatOrderQuiz,

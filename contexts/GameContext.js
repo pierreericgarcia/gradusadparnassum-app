@@ -8,9 +8,10 @@ import { scaleAlterationsCountQuiz } from '../quizzes/scaleAlterationsCountQuiz'
 import { scaleAlteredNotesQuiz } from '../quizzes/scaleAlteredNotesQuiz';
 import { scaleNaturalNotesQuiz } from '../quizzes/scaleNaturalNotesQuiz';
 import { sharpOrderQuiz } from '../quizzes/sharpOrderQuiz';
-import { intervalFromNoteQuiz } from '../quizzes/intervalFromNoteQuiz';
+import { diatonicIntervalFromNoteQuiz } from '../quizzes/diatonicIntervalFromNoteQuiz';
 import { noteAlterationInScaleQuiz } from '../quizzes/noteAlterationInScaleQuiz';
 import { chordQuiz } from '../quizzes/chordQuiz';
+import { intervalFromNoteQuiz } from '../quizzes/intervalFromNoteQuiz';
 
 export const GAME_DURATION = 120;
 const GameContext = createContext();
@@ -20,6 +21,7 @@ const quizzes = [
   degreeQuiz,
   fifthCycleQuiz,
   flatOrderQuiz,
+  diatonicIntervalFromNoteQuiz,
   intervalFromNoteQuiz,
   noteAlterationInScaleQuiz,
   scaleAlterationsCountQuiz,

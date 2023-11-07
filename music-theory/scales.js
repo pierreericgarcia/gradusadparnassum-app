@@ -20,7 +20,7 @@ const major_scale_pattern = [
   intervals.minor_second,
 ];
 
-const harmonic_minor_scale_pattern = [
+const minor_scale_pattern = [
   intervals.major_second,
   intervals.minor_second,
   intervals.major_second,
@@ -30,7 +30,7 @@ const harmonic_minor_scale_pattern = [
   intervals.minor_second,
 ];
 
-const scales_pattern = {
+export const scales_pattern = {
   major: {
     id: 'major',
     label: 'Majeur',
@@ -72,44 +72,44 @@ const scales_pattern = {
       },
     ],
   },
-  harmonic_minor: {
-    id: 'harmonic_minor',
-    label: 'Mineur Harmonique',
+  minor: {
+    id: 'minor',
+    label: 'Mineur',
     modes: [
       {
-        id: 'harmonic_minor',
-        label: 'Mineur Harmonique',
-        intervals: harmonic_minor_scale_pattern,
+        id: 'minor',
+        label: 'Mineur',
+        intervals: minor_scale_pattern,
       },
       {
         id: 'locrian_becarre_thirteenth',
         label: 'Locrien ♮13',
-        intervals: rotateArray(harmonic_minor_scale_pattern, -1),
+        intervals: rotateArray(minor_scale_pattern, -1),
       },
       {
         id: 'ionian_sharp_fifth',
         label: 'Ionien ♯5',
-        intervals: rotateArray(harmonic_minor_scale_pattern, -2),
+        intervals: rotateArray(minor_scale_pattern, -2),
       },
       {
         id: 'dorian_sharp_eleventh',
         label: 'Dorien ♯11',
-        intervals: rotateArray(harmonic_minor_scale_pattern, -3),
+        intervals: rotateArray(minor_scale_pattern, -3),
       },
       {
         id: 'mixolydian_flat_nineth_flat_thirteenth',
         label: 'Mixolydien ♭9♭13',
-        intervals: rotateArray(harmonic_minor_scale_pattern, -4),
+        intervals: rotateArray(minor_scale_pattern, -4),
       },
       {
         id: 'lydian_sharp_nineth',
         label: 'Lydien ♯9',
-        intervals: rotateArray(harmonic_minor_scale_pattern, -5),
+        intervals: rotateArray(minor_scale_pattern, -5),
       },
       {
         id: 'altered_flat_flat_seventh',
         label: 'Altéré ♭♭7',
-        intervals: rotateArray(harmonic_minor_scale_pattern, -6),
+        intervals: rotateArray(minor_scale_pattern, -6),
       },
     ],
   },
@@ -197,14 +197,14 @@ const generateNaturalMinorScales = majorScales => {
   }, {});
 };
 
-const generateHarmonicMinorScales = naturalMinorScales => {
+const generateMinorScales = naturalMinorScales => {
   return Object.keys(naturalMinorScales).reduce((acc, scaleKey) => {
     const naturalMinorScale = naturalMinorScales[scaleKey];
-    const harmonicMinorScale = createScaleFromNoteAndMode(
+    const minorScale = createScaleFromNoteAndMode(
       naturalMinorScale.notes[0],
-      scales_pattern.harmonic_minor.modes[0],
+      scales_pattern.minor.modes[0],
     );
-    acc[harmonicMinorScale.notes[0].id] = harmonicMinorScale;
+    acc[minorScale.notes[0].id] = minorScale;
     return acc;
   }, {});
 };
@@ -222,16 +222,17 @@ const majorScales = {
 };
 
 const naturalMinorScales = generateNaturalMinorScales(majorScales);
-const harmonicMinorScales = generateHarmonicMinorScales(naturalMinorScales);
+const minorScales = generateMinorScales(naturalMinorScales);
 
 export const scales = {
   major: majorScales,
-  natural_minor: naturalMinorScales,
-  harmonic_minor: harmonicMinorScales,
+  minor: minorScales,
 };
 
-export const getRandomScale = (mode, exceptions = []) => {
-  const targetMode = mode ? mode : getRandomItem(Object.keys(scales));
+export const getRandomScale = (modes, exceptions = []) => {
+  const targetMode = modes
+    ? getRandomItem(modes)
+    : getRandomItem(Object.keys(scales));
   const randomScale = getRandomItem(
     Object.values(scales[targetMode]).filter(
       scale => !exceptions.includes(scale.id),

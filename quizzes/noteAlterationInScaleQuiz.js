@@ -5,7 +5,7 @@ import { getRandomItem } from '../utils.js';
 import chalk from 'chalk';
 
 export const noteAlterationInScaleQuiz = () => {
-  const randomScale = getRandomScale('major');
+  const randomScale = getRandomScale(['major']);
   const randomNoteInScale = getRandomItem(randomScale.notes);
 
   const checkAnswer = ([alteration]) => {

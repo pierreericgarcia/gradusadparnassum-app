@@ -1,33 +1,35 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { getRandomItem } from '../utils';
-import { degreeQuiz } from '../quizzes/degreeQuiz';
-import { fifthCycleQuiz } from '../quizzes/fifthCycleQuiz';
-import { flatOrderQuiz } from '../quizzes/flatOrderQuiz';
-import { scaleAlterationsCountQuiz } from '../quizzes/scaleAlterationsCountQuiz';
-import { scaleAlteredNotesQuiz } from '../quizzes/scaleAlteredNotesQuiz';
-import { scaleNaturalNotesQuiz } from '../quizzes/scaleNaturalNotesQuiz';
-import { sharpOrderQuiz } from '../quizzes/sharpOrderQuiz';
-import { diatonicIntervalFromNoteQuiz } from '../quizzes/diatonicIntervalFromNoteQuiz';
-import { noteAlterationInScaleQuiz } from '../quizzes/noteAlterationInScaleQuiz';
-import { chordQuiz } from '../quizzes/chordQuiz';
-import { intervalFromNoteQuiz } from '../quizzes/intervalFromNoteQuiz';
+// import { degreeQuiz } from '../quizzes/degreeQuiz';
+// import { fifthCycleQuiz } from '../quizzes/fifthCycleQuiz';
+// import { flatOrderQuiz } from '../quizzes/flatOrderQuiz';
+// import { scaleAlterationsCountQuiz } from '../quizzes/scaleAlterationsCountQuiz';
+// import { scaleAlteredNotesQuiz } from '../quizzes/scaleAlteredNotesQuiz';
+// import { scaleNaturalNotesQuiz } from '../quizzes/scaleNaturalNotesQuiz';
+// import { sharpOrderQuiz } from '../quizzes/sharpOrderQuiz';
+// import { diatonicIntervalFromNoteQuiz } from '../quizzes/diatonicIntervalFromNoteQuiz';
+// import { noteAlterationInScaleQuiz } from '../quizzes/noteAlterationInScaleQuiz';
+// import { chordQuiz } from '../quizzes/chordQuiz';
+// import { intervalFromNoteQuiz } from '../quizzes/intervalFromNoteQuiz';
+import { relativeScaleQuiz } from '../quizzes/relativeScaleQuiz';
 
 export const GAME_DURATION = 120;
 const GameContext = createContext();
 
 const quizzes = [
-  chordQuiz,
-  degreeQuiz,
-  fifthCycleQuiz,
-  flatOrderQuiz,
-  diatonicIntervalFromNoteQuiz,
-  intervalFromNoteQuiz,
-  noteAlterationInScaleQuiz,
-  scaleAlterationsCountQuiz,
-  scaleAlteredNotesQuiz,
-  scaleNaturalNotesQuiz,
-  sharpOrderQuiz,
+  relativeScaleQuiz,
+  // scaleAlterationsCountQuiz,
+  // diatonicIntervalFromNoteQuiz,
+  // intervalFromNoteQuiz,
+  // chordQuiz,
+  // degreeQuiz,
+  // fifthCycleQuiz,
+  // flatOrderQuiz,
+  // noteAlterationInScaleQuiz,
+  // scaleAlteredNotesQuiz,
+  // scaleNaturalNotesQuiz,
+  // sharpOrderQuiz,
 ];
 
 export const useGame = () => {

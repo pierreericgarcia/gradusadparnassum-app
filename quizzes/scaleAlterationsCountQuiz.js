@@ -2,7 +2,7 @@ import { getRandomScale } from '../music-theory/scales';
 import AlterationsCountQuestion from '../questions/AlterationsCountQuestion';
 
 export const scaleAlterationsCountQuiz = () => {
-  const randomScale = getRandomScale('major');
+  const randomScale = getRandomScale();
 
   const countAlterations = notes => {
     return notes.filter(note => note.alteration).length;

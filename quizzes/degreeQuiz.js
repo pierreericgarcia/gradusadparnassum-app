@@ -5,7 +5,7 @@ import { getRandomIndex, toRoman } from '../utils';
 import AlterationQuestion from '../questions/AlterationQuestion';
 
 export const degreeQuiz = () => {
-  const randomScale = getRandomScale('major');
+  const randomScale = getRandomScale(['major']);
   const randomDegreeIndex = getRandomIndex(randomScale.notes);
 
   const checkAnswer = ([note, alteration]) => {

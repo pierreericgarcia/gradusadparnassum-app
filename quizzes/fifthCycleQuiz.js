@@ -5,7 +5,7 @@ import { getRandomItem } from '../utils';
 import AlterationQuestion from '../questions/AlterationQuestion';
 
 export const fifthCycleQuiz = () => {
-  const randomScale = getRandomScale('major');
+  const randomScale = getRandomScale(['major']);
   const randomDirection = getRandomItem([
     {
       value: 'asc',

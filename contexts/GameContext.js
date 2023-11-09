@@ -1,28 +1,28 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { getRandomItem } from '../utils';
+import { intervalFromNoteQuiz } from '../quizzes/intervalFromNoteQuiz';
+import { relativeScaleQuiz } from '../quizzes/relativeScaleQuiz';
+import { chordQuiz } from '../quizzes/chordQuiz';
+// import { scaleAlterationsCountQuiz } from '../quizzes/scaleAlterationsCountQuiz';
 // import { degreeQuiz } from '../quizzes/degreeQuiz';
 // import { fifthCycleQuiz } from '../quizzes/fifthCycleQuiz';
 // import { flatOrderQuiz } from '../quizzes/flatOrderQuiz';
-// import { scaleAlterationsCountQuiz } from '../quizzes/scaleAlterationsCountQuiz';
 // import { scaleAlteredNotesQuiz } from '../quizzes/scaleAlteredNotesQuiz';
 // import { scaleNaturalNotesQuiz } from '../quizzes/scaleNaturalNotesQuiz';
 // import { sharpOrderQuiz } from '../quizzes/sharpOrderQuiz';
-import { diatonicIntervalFromNoteQuiz } from '../quizzes/diatonicIntervalFromNoteQuiz';
+// import { diatonicIntervalFromNoteQuiz } from '../quizzes/diatonicIntervalFromNoteQuiz';
 // import { noteAlterationInScaleQuiz } from '../quizzes/noteAlterationInScaleQuiz';
-// import { chordQuiz } from '../quizzes/chordQuiz';
-// import { intervalFromNoteQuiz } from '../quizzes/intervalFromNoteQuiz';
-import { relativeScaleQuiz } from '../quizzes/relativeScaleQuiz';
 
 export const GAME_DURATION = 120;
 const GameContext = createContext();
 
 const quizzes = [
   relativeScaleQuiz,
+  intervalFromNoteQuiz,
+  chordQuiz,
   // scaleAlterationsCountQuiz,
-  diatonicIntervalFromNoteQuiz,
-  // intervalFromNoteQuiz,
-  // chordQuiz,
+  // diatonicIntervalFromNoteQuiz,
   // degreeQuiz,
   // fifthCycleQuiz,
   // flatOrderQuiz,

@@ -7,15 +7,7 @@ import chalk from 'chalk';
 
 export const intervalFromNoteQuiz = () => {
   const randomNote = getRandomItem(Object.values(naturalNotes));
-  const randomInterval = getRandomItem(
-    Object.values(intervals).filter(
-      ({ id }) =>
-        !id.includes('augmented') &&
-        !id.includes('diminished') &&
-        !id.includes('unison') &&
-        !id.includes('octave'),
-    ),
-  );
+  const randomInterval = getRandomItem(Object.values(intervals));
 
   const checkAnswer = ([note, alteration]) => {
     const answeredNote = notes[`${note.id}_${alteration.id}`];

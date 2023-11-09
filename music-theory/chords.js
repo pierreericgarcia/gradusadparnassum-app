@@ -7,7 +7,6 @@ import {
 export const chords = {
   major: {
     id: 'major',
-    aliases: ['Maj', 'Majeur'],
     label: 'Majeur',
     intervals: [
       intervals.unison,
@@ -17,7 +16,6 @@ export const chords = {
   },
   minor: {
     id: 'minor',
-    aliases: ['min', 'mineur'],
     label: 'Mineur',
     intervals: [
       intervals.unison,
@@ -27,7 +25,6 @@ export const chords = {
   },
   diminished: {
     id: 'diminished',
-    aliases: ['dim', '°'],
     label: 'Diminué',
     intervals: [
       intervals.unison,
@@ -37,7 +34,6 @@ export const chords = {
   },
   augmented: {
     id: 'augmented',
-    aliases: ['aug', '+'],
     label: 'Augmenté',
     intervals: [
       intervals.unison,
@@ -47,7 +43,6 @@ export const chords = {
   },
   major_seventh: {
     id: 'major_seventh',
-    aliases: ['Maj7', 'Majeur 7', 'Δ'],
     label: 'Septième Majeure',
     intervals: [
       intervals.unison,
@@ -58,7 +53,6 @@ export const chords = {
   },
   minor_seventh: {
     id: 'minor_seventh',
-    aliases: ['min7', 'mineur 7'],
     label: 'Septième Mineure',
     intervals: [
       intervals.unison,
@@ -69,7 +63,6 @@ export const chords = {
   },
   dominant_seventh: {
     id: 'dominant_seventh',
-    aliases: ['7'],
     label: 'Septième de Dominante',
     intervals: [
       intervals.unison,
@@ -80,7 +73,6 @@ export const chords = {
   },
   half_diminished_seventh: {
     id: 'half_diminished_seventh',
-    aliases: ['min7/♭5', 'min7b5'],
     label: 'Septième Mineure et Quinte Diminuée',
     intervals: [
       intervals.unison,
@@ -91,7 +83,6 @@ export const chords = {
   },
   fully_diminished_seventh: {
     id: 'fully_diminished_seventh',
-    aliases: ['dim7', 'diminuée 7'],
     label: 'Septième Diminuée',
     intervals: [
       intervals.unison,
@@ -109,7 +100,6 @@ export const createChord = (note, chord) => {
 
   return {
     id: `${note.id}_${chord.id}`,
-    alias: note.alias + chord.aliases[0],
     label: `${note.label} ${chord.label}`,
     notes: chordNotes,
     quality: chord,

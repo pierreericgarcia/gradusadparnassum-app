@@ -8,7 +8,7 @@ import { getRandomItem } from '../utils';
 // import { scaleAlteredNotesQuiz } from '../quizzes/scaleAlteredNotesQuiz';
 // import { scaleNaturalNotesQuiz } from '../quizzes/scaleNaturalNotesQuiz';
 // import { sharpOrderQuiz } from '../quizzes/sharpOrderQuiz';
-// import { diatonicIntervalFromNoteQuiz } from '../quizzes/diatonicIntervalFromNoteQuiz';
+import { diatonicIntervalFromNoteQuiz } from '../quizzes/diatonicIntervalFromNoteQuiz';
 // import { noteAlterationInScaleQuiz } from '../quizzes/noteAlterationInScaleQuiz';
 // import { chordQuiz } from '../quizzes/chordQuiz';
 // import { intervalFromNoteQuiz } from '../quizzes/intervalFromNoteQuiz';
@@ -20,7 +20,7 @@ const GameContext = createContext();
 const quizzes = [
   relativeScaleQuiz,
   // scaleAlterationsCountQuiz,
-  // diatonicIntervalFromNoteQuiz,
+  diatonicIntervalFromNoteQuiz,
   // intervalFromNoteQuiz,
   // chordQuiz,
   // degreeQuiz,

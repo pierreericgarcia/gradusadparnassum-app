@@ -4,6 +4,7 @@ import { getRandomItem } from '../utils';
 import { intervalFromNoteQuiz } from '../quizzes/intervalFromNoteQuiz';
 import { relativeScaleQuiz } from '../quizzes/relativeScaleQuiz';
 import { chordQuiz } from '../quizzes/chordQuiz';
+import { tonalityFromAlterationsQuiz } from '../quizzes/tonalityFromAlterationsQuiz';
 // import { scaleAlterationsCountQuiz } from '../quizzes/scaleAlterationsCountQuiz';
 // import { degreeQuiz } from '../quizzes/degreeQuiz';
 // import { fifthCycleQuiz } from '../quizzes/fifthCycleQuiz';
@@ -18,6 +19,7 @@ export const GAME_DURATION = 120;
 const GameContext = createContext();
 
 const quizzes = [
+  tonalityFromAlterationsQuiz,
   relativeScaleQuiz,
   intervalFromNoteQuiz,
   chordQuiz,

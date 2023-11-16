@@ -5,7 +5,7 @@ import ModeQuestion from '../questions/ModeQuestion.js';
 import ShortAlterationQuestion from '../questions/ShortAlterationQuestion.js';
 
 export const relativeScaleQuiz = () => {
-  const randomScale = getRandomScale();
+  const randomScale = getRandomScale(['major', 'minor']);
 
   const getRelativeScale = scale => {
     switch (scale.mode.id) {

@@ -62,7 +62,7 @@ export const scales_pattern = {
       },
       {
         id: 'natural_minor',
-        label: 'Mineur Naturel',
+        label: 'Mineur',
         intervals: rotateArray(major_scale_pattern, -5),
       },
       {
@@ -227,6 +227,7 @@ const minorScales = generateMinorScales(naturalMinorScales);
 export const scales = {
   major: majorScales,
   minor: minorScales,
+  natural_minor: naturalMinorScales,
 };
 
 export const getRandomScale = (modes, exceptions = []) => {

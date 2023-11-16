@@ -9,12 +9,12 @@ import NoteQuestion from '../questions/NoteQuestion';
 import { createIncrementalArray, getRandomIndex } from '../utils';
 import { createNaturalDegreeChord } from '../music-theory/chords';
 import { getRandomScale } from '../music-theory/scales';
-import ShortAlterationQuestion from '../questions/ShortAlterationQuestion';
 import _ from 'lodash';
+import AlterationQuestion from '../questions/AlterationQuestion';
 const { flatten } = _;
 
 export const chordQuiz = () => {
-  const randomScale = getRandomScale();
+  const randomScale = getRandomScale(['major', 'minor']);
   const randomDegree = getRandomIndex(createIncrementalArray(7));
   const randomTonalChord = createNaturalDegreeChord(
     randomDegree,
@@ -42,7 +42,7 @@ export const chordQuiz = () => {
   return {
     title: `Accord de ${randomTonalChord.label} ?`,
     questions: flatten(
-      randomTonalChord.notes.map(() => [NoteQuestion, ShortAlterationQuestion]),
+      randomTonalChord.notes.map(() => [NoteQuestion, AlterationQuestion]),
     ),
     checkAnswer,
   };

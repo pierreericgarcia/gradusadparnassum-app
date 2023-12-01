@@ -76,7 +76,7 @@ export const typography = {
 export const fontSizes = {
   xxxl: { fontSize: 48, lineHeight: 56 },
   xxl: { fontSize: 36, lineHeight: 44 },
-  xlplus: { fontSize: 30, lineHeight: 38 },
+  xlplus: { fontSize: 28, lineHeight: 38 },
   xl: { fontSize: 24, lineHeight: 34 },
   lg: { fontSize: 20, lineHeight: 32 },
   md: { fontSize: 18, lineHeight: 26 },

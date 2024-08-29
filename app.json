@@ -16,11 +16,10 @@
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/7fccb34b-881d-4155-90e3-74e762bbf764"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.dokeezy.gradusadparnassumapp"
     },
     "android": {
       "adaptiveIcon": {
@@ -40,10 +39,6 @@
     "owner": "dokeezy",
     "runtimeVersion": {
       "policy": "appVersion"
-    },
-    "plugins": [
-      "expo-asset",
-      "expo-font"
-    ]
+    }
   }
 }
